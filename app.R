@@ -27,8 +27,15 @@ library(tidygraph)
 ###########################################
 ## 1) GLOBAL SECTION
 ###########################################
-# 1.1) Load CSV data
-data_main_raw <- read.csv("data_FoodAI_128.csv", stringsAsFactors = FALSE)
+# 1.1) Load data
+# The review article metadata is stored in the provided Web of Science
+# bibliography. We convert that file directly into a data frame so that
+# no external CSV is required.
+data_main_raw <- convert2df(
+  "FoodAI_Feb2025.bib",
+  dbsource = "wos",
+  format   = "bibtex"
+)
 research_refs_meta <- read.csv("openalex_minimal.csv", stringsAsFactors = FALSE)
 
 
@@ -58,7 +65,8 @@ cols_to_keep <- c("DocID","TI","PY","DT","SO","AU","affiliations","DE","ID","SC"
 data_main <- data_main_raw[, cols_to_keep]
 
 # 1.2) Create bibliometrix object
-data_main_biblio <- convert2df("FoodAI_Feb2025.bib", dbsource = "wos", format = "bibtex")
+# data_main_raw already contains the converted bibliography, so we reuse it
+data_main_biblio <- data_main_raw
 
 
 # -----------------------------
