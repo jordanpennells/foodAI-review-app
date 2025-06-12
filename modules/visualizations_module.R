@@ -336,15 +336,9 @@ visualizations_module_ui <- function() {
                             color = "#2C3E50"
                           )
                         )
-               )
-             )
-           )
-  ),
-  
-  # Research Article Analysis
-             )
-           )
-  )
+            )
+            )          # close tabsetPanel
+          )            # close fluidPage
 }
 
 visualizations_module_server <- function(input, output, session) {
