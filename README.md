@@ -47,3 +47,7 @@ These files were collected as part of the systematic review described in the acc
 
 The associated paper provides a systematic bibliometric analysis of artificial intelligence research in food science and engineering. Using Web of Science data, the authors review how research topics and industry adoption have evolved, highlight barriers to wider implementation and identify gaps for future study. The dashboard in this repository offers an interactive way to explore that bibliometric dataset and complements the narrative findings presented in the paper.
 
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
