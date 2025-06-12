@@ -4,9 +4,11 @@ Thumbs.db
 ehthumbs.db
 desktop.ini
 
+
 # R and RStudio files
 .Rhistory
 .RData
 .Rproj.user/
 .Rapp.history
 .Ruserdata
+
