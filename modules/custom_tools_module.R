@@ -149,5 +149,23 @@ custom_tools_module_server <- function(input, output, session) {
     Description = c(
       "Automatic evaluation of cut surface of blue cheese; monitoring gas hole formation; ingredient estimation in pasteurized cheese.",
       "Classification of milk quality (low/medium/high) based on sensory & true values.",
+      "Robotic inspection and packaging of cheese products using integrated computer vision.",
+      "Real-time analysis of temperature, pH and other sensor data to track process conditions.",
+      "Data-driven prediction and adjustment of fermentation parameters for consistent quality.",
+      "Rule-based decision support providing guidance for optimal control actions during production.",
+      "Algorithms identifying optimal process settings to maximise yield while reducing waste.",
+      "Forecasting of final product characteristics and shelf life for continuous improvement."
+    ),
+    check.names = FALSE,
+    stringsAsFactors = FALSE
+  )
+
+  output$notebooklm_output <- DT::renderDataTable({
+    DT::datatable(
+      notebooklm_df,
+      rownames = FALSE,
+      options = list(dom = 't', paging = FALSE, autoWidth = TRUE)
+    )
+  })
 
 }
