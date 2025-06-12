@@ -4,6 +4,7 @@ database_module_ui <- function() {
   fluidPage(
     titlePanel("Food AI Review Database"),
     p("Browse our curated collection of Food AI review articles below."),
+    downloadButton("downloadTable", "Download CSV"),
     fluidRow(
       column(
         width = 12,
@@ -18,8 +19,9 @@ database_module_ui <- function() {
 }
 
 database_module_server <- function(input, output, session) {
-  output$mainTableUI <- renderDT({
-    data_display <- data_main %>%
+
+  data_display <- reactive({
+    data_main %>%
       select(-ID, -DocID) %>%
       rename(
         "Title"              = TI,
@@ -37,9 +39,11 @@ database_module_server <- function(input, output, session) {
       mutate(Authors = Authors %>%
                str_replace_all(";", "; ") %>%
                str_to_title())
+  })
 
+  output$mainTableUI <- renderDT({
     datatable(
-      data_display,
+      data_display(),
       escape   = FALSE,
       selection = 'none',
       options = list(
@@ -60,4 +64,13 @@ database_module_server <- function(input, output, session) {
       )
     )
   })
+
+  output$downloadTable <- downloadHandler(
+    filename = function() {
+      "FoodAI_review_database.csv"
+    },
+    content = function(file) {
+      write.csv(data_display(), file, row.names = FALSE)
+    }
+  )
 }

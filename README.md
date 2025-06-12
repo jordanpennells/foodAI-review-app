@@ -33,6 +33,10 @@ shiny::runApp()
 
 Both commands launch the local Shiny server and open the dashboard in your browser.
 
+## Downloading Data and Plots
+
+Several tabs now feature download buttons. In the **Food AI Review Database** tab you can export the table of review articles as a CSV file. The **Publication Years** visualisation also includes a button to save the bar chart as a PNG image.
+
 ## Data Files
 
 Obtained from a February 2025 search of the Web of Science Core Collection and complementary OpenAlex queries, the app expects the following files in the repository root:
