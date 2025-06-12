@@ -40,7 +40,8 @@ visualizations_module_ui <- function() {
                               plotlyOutput("yearDistPlot", height = "600px"),
                               type  = 6,      # pick a spinner style 1–8
                               color = "#2C3E50"
-                            )
+                            ),
+                            downloadButton("downloadYearDist", "Download Plot")
                           )
                         )
                ),
@@ -358,31 +359,43 @@ visualizations_module_server <- function(input, output, session) {
     })
     
     #### (C) Year Distribution (interactive) ####
-    output$yearDistPlot <- renderPlotly({
+    yearDistPlotObj <- reactive({
       year_filtered <- data_main %>%
         filter(!is.na(PY)) %>%
         filter(as.numeric(PY) >= input$yearRange[1],
                as.numeric(PY) <= input$yearRange[2])
-      
+
       if (nrow(year_filtered) == 0) {
         p <- ggplot() +
           geom_blank() +
           labs(title = "No publications in the selected range") +
           theme_minimal()
-        return(ggplotly(p))
+        return(p)
       }
-      
+
       year_counts <- year_filtered %>%
         count(PY) %>%
         rename(n = n)
-      
+
       p <- ggplot(year_counts, aes(x = factor(PY), y = n)) +
         geom_col(fill = "cornflowerblue") +
         labs(title = "Publication Year Distribution", x = "Year", y = "Count") +
         theme_minimal()
-      
-      ggplotly(p) %>% layout(hovermode = "x")
+      p
     })
+
+    output$yearDistPlot <- renderPlotly({
+      ggplotly(yearDistPlotObj()) %>% layout(hovermode = "x")
+    })
+
+    output$downloadYearDist <- downloadHandler(
+      filename = function() {
+        paste0("year_distribution.png")
+      },
+      content = function(file) {
+        ggsave(file, plot = yearDistPlotObj(), width = 8, height = 6)
+      }
+    )
     
     #### (D) Keywords (interactive) ####
     clickedKeyword <- reactiveVal(NULL)
