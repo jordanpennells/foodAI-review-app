@@ -52,16 +52,9 @@ research_module_ui <- function() {
                                       selected = "2011-2020"),
                           wordcloud2Output("keywordWordCloud")
                         )
-               )
-             )
-           )
-  ),
-  
-  # CustomGPT
-  # tabPanel("CustomGPT",
-             )
-           )
-  )
+              )
+            )      # close tabsetPanel
+          )        # close fluidPage
 }
 
 research_module_server <- function(input, output, session) {
