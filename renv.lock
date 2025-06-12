@@ -1,0 +1,31 @@
+{
+  "R": {
+    "Version": "4.3.1",
+    "Repositories": [
+      {"Name": "CRAN", "URL": "https://cran.rstudio.com"}
+    ]
+  },
+  "Packages": {
+    "shiny": {"Package": "shiny", "Version": "1.7.4", "Source": "Repository"},
+    "shinythemes": {"Package": "shinythemes", "Version": "1.2.0", "Source": "Repository"},
+    "memoise": {"Package": "memoise", "Version": "2.0.1", "Source": "Repository"},
+    "dplyr": {"Package": "dplyr", "Version": "1.1.4", "Source": "Repository"},
+    "DT": {"Package": "DT", "Version": "0.29", "Source": "Repository"},
+    "ggplot2": {"Package": "ggplot2", "Version": "3.4.4", "Source": "Repository"},
+    "plotly": {"Package": "plotly", "Version": "4.10.4", "Source": "Repository"},
+    "bibliometrix": {"Package": "bibliometrix", "Version": "4.2.1", "Source": "Repository"},
+    "stringr": {"Package": "stringr", "Version": "1.5.1", "Source": "Repository"},
+    "tm": {"Package": "tm", "Version": "0.7-10", "Source": "Repository"},
+    "igraph": {"Package": "igraph", "Version": "1.5.1", "Source": "Repository"},
+    "ggraph": {"Package": "ggraph", "Version": "2.1.0", "Source": "Repository"},
+    "tidyr": {"Package": "tidyr", "Version": "1.3.0", "Source": "Repository"},
+    "proxy": {"Package": "proxy", "Version": "0.4-27", "Source": "Repository"},
+    "ggwordcloud": {"Package": "ggwordcloud", "Version": "0.6.1", "Source": "Repository"},
+    "tidytext": {"Package": "tidytext", "Version": "0.3.6", "Source": "Repository"},
+    "wordcloud2": {"Package": "wordcloud2", "Version": "0.2.1", "Source": "Repository"},
+    "topicmodels": {"Package": "topicmodels", "Version": "0.2-16", "Source": "Repository"},
+    "shinycssloaders": {"Package": "shinycssloaders", "Version": "1.0.0", "Source": "Repository"},
+    "widyr": {"Package": "widyr", "Version": "0.1.5", "Source": "Repository"},
+    "tidygraph": {"Package": "tidygraph", "Version": "1.2.3", "Source": "Repository"}
+  }
+}
