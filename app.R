@@ -30,6 +30,7 @@ source("modules/database_module.R")
 source("modules/visualizations_module.R")
 source("modules/research_module.R")
 source("modules/custom_tools_module.R")
+source("modules/case_studies_module.R")
 source("modules/gallery_module.R")
 source("modules/help_module.R")
 
@@ -318,6 +319,7 @@ ui <- navbarPage(
   visualizations_module_ui(),
   research_module_ui(),
   custom_tools_module_ui(),
+  case_studies_module_ui(),
   gallery_module_ui(),
   help_module_ui()
 )
@@ -332,6 +334,7 @@ server <- function(input, output, session) {
   visualizations_module_server(input, output, session)
   research_module_server(input, output, session)
   custom_tools_module_server(input, output, session)
+  case_studies_module_server(input, output, session)
   gallery_module_server(input, output, session)
   help_module_server(input, output, session)
 }
