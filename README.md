@@ -22,6 +22,7 @@ Ensure these packages are installed before running the app.
 ## Running the App
 
 Clone this repository and run one of the following commands from the repository root:
+Before launching, run `renv::restore()` to install the packages recorded in `renv.lock`.
 
 ```R
 # Option 1
