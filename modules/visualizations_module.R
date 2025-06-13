@@ -335,11 +335,11 @@ visualizations_module_ui <- function() {
                             type  = 6,
                             color = "#2C3E50"
                           )
-                        )
-            )
-            )          # close tabsetPanel
-          )            # close fluidPage
-  )
+                          )            # close inner fluidPage
+                        )            # close inner tabPanel
+              )          # close tabsetPanel
+            )            # close fluidPage
+  )                      # close tabPanel
 }
 
 visualizations_module_server <- function(input, output, session) {

@@ -1,60 +1,90 @@
 research_module_ui <- function() {
-  tabPanel("Research Article Analysis",
-           fluidPage(
-             titlePanel("Research Article Analysis"),
-             tabsetPanel(
-                          sliderInput("yearRangeResearch", "Select Publication Year Range:",
-                                      min = min(research_refs_meta$oa_year, na.rm = TRUE),
-                                      max = max(research_refs_meta$oa_year, na.rm = TRUE),
-                                      value = c(min(research_refs_meta$oa_year, na.rm = TRUE),
-                                                max(research_refs_meta$oa_year, na.rm = TRUE)),
-                                      step = 1),
-                          h3("Research Articles Over Time"),
-                          withSpinner(
-                            plotlyOutput("researchYearPlot", height = "600px"),
-                            type  = 6,      # pick a spinner style 1–8
-                            color = "#2C3E50"
-                          ),
-                          p("This bar chart shows the number of research articles (cited by the reviews) published per year within the selected range.")
-                        )
-               ),
-               tabPanel("Keyword Frequency",
-                        fluidPage(
-                          sliderInput("yearRangeKeywords", "Select Publication Year Range:",
-                                      min = min(research_refs_meta$oa_year, na.rm = TRUE),
-                                      max = max(research_refs_meta$oa_year, na.rm = TRUE),
-                                      value = c(min(research_refs_meta$oa_year, na.rm = TRUE),
-                                                max(research_refs_meta$oa_year, na.rm = TRUE)),
-                                      step = 1),
-                          sliderInput("nKeywords", "Number of Keywords to Display:",
-                                      min = 1, max = 100, value = 40, step = 1),
-                          h3("Top Research Article Keywords"),
-                          withSpinner(
-                            plotlyOutput("researchKeywordBarPlot", height = "600px"),
-                            type  = 6,      # pick a spinner style 1–8
-                            color = "#2C3E50"
-                          ),
-                          br()
-                        )
-               ),
-               tabPanel("Title Wordclouds",
-                        fluidPage(
-                          selectInput("titleDecade", "Select Decade:",
-                                      choices = c("<1950", "1951-1980", "1981-1990", "1991-2000", "2001-2010", "2011-2020", ">2020"),
-                                      selected = "2011-2020"),
-                          wordcloud2Output("titleWordCloud")
-                        )
-               ),
-               tabPanel("Keyword Wordclouds",
-                        fluidPage(
-                          selectInput("keywordDecade", "Select Decade:",
-                                      choices = c("<1950", "1951-1980", "1981-1990", "1991-2000", "2001-2010", "2011-2020", ">2020"),
-                                      selected = "2011-2020"),
-                          wordcloud2Output("keywordWordCloud")
-                        )
-              )
-            )      # close tabsetPanel
-
+  tabPanel(
+    "Research Article Analysis",
+    fluidPage(
+      titlePanel("Research Article Analysis"),
+      tabsetPanel(
+        tabPanel(
+          "Articles Over Time",
+          fluidPage(
+            sliderInput(
+              "yearRangeResearch", "Select Publication Year Range:",
+              min = min(research_refs_meta$oa_year, na.rm = TRUE),
+              max = max(research_refs_meta$oa_year, na.rm = TRUE),
+              value = c(
+                min(research_refs_meta$oa_year, na.rm = TRUE),
+                max(research_refs_meta$oa_year, na.rm = TRUE)
+              ),
+              step = 1
+            ),
+            h3("Research Articles Over Time"),
+            withSpinner(
+              plotlyOutput("researchYearPlot", height = "600px"),
+              type = 6,
+              color = "#2C3E50"
+            ),
+            p(
+              "This bar chart shows the number of research articles (cited by the reviews) published per year within the selected range."
+            )
+          )
+        ),
+        tabPanel(
+          "Keyword Frequency",
+          fluidPage(
+            sliderInput(
+              "yearRangeKeywords", "Select Publication Year Range:",
+              min = min(research_refs_meta$oa_year, na.rm = TRUE),
+              max = max(research_refs_meta$oa_year, na.rm = TRUE),
+              value = c(
+                min(research_refs_meta$oa_year, na.rm = TRUE),
+                max(research_refs_meta$oa_year, na.rm = TRUE)
+              ),
+              step = 1
+            ),
+            sliderInput(
+              "nKeywords", "Number of Keywords to Display:",
+              min = 1, max = 100, value = 40, step = 1
+            ),
+            h3("Top Research Article Keywords"),
+            withSpinner(
+              plotlyOutput("researchKeywordBarPlot", height = "600px"),
+              type = 6,
+              color = "#2C3E50"
+            ),
+            br()
+          )
+        ),
+        tabPanel(
+          "Title Wordclouds",
+          fluidPage(
+            selectInput(
+              "titleDecade", "Select Decade:",
+              choices = c(
+                "<1950", "1951-1980", "1981-1990", "1991-2000",
+                "2001-2010", "2011-2020", ">2020"
+              ),
+              selected = "2011-2020"
+            ),
+            wordcloud2Output("titleWordCloud")
+          )
+        ),
+        tabPanel(
+          "Keyword Wordclouds",
+          fluidPage(
+            selectInput(
+              "keywordDecade", "Select Decade:",
+              choices = c(
+                "<1950", "1951-1980", "1981-1990", "1991-2000",
+                "2001-2010", "2011-2020", ">2020"
+              ),
+              selected = "2011-2020"
+            ),
+            wordcloud2Output("keywordWordCloud")
+          )
+        )
+        )      # close tabsetPanel
+      )        # close fluidPage
+  )            # close tabPanel
 }
 
 research_module_server <- function(input, output, session) {
