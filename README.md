@@ -6,7 +6,7 @@ This repository contains a Shiny application for interactively exploring bibliom
 
 The app relies on several R packages:
 
-- shiny, shinythemes, shinycssloaders
+- shiny, bslib, shinycssloaders
 - memoise
 - dplyr, tidyr, widyr
 - ggplot2, plotly, ggwordcloud
@@ -33,6 +33,8 @@ shiny::runApp()
 ```
 
 Both commands launch the local Shiny server and open the dashboard in your browser.
+
+Use the toggle in the navigation bar to switch between light and dark themes during runtime.
 
 ## Downloading Data and Plots
 
