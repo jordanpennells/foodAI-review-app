@@ -15,7 +15,7 @@ gallery_module_server <- function(input, output, session) {
     items <- lapply(seq_len(nrow(gallery_images)), function(i) {
       row <- gallery_images[i, ]
       tags$div(class = if(i == 1) "item active" else "item",
-               tags$img(src = row$file, style = "width:100%"),
+               tags$img(src = row$file, style = "width:100%", alt = row$title),
                tags$div(class = "carousel-caption",
                         tags$h4(row$title),
                         tags$p(tags$em("Citation:"), row$citation)
@@ -40,7 +40,7 @@ gallery_module_server <- function(input, output, session) {
       row <- gallery_images[i, ]
       column(4,
              tags$a(href = "#", onclick = sprintf("$('#modal%d').modal('show')", i),
-                    tags$img(src = row$file, style = "width:100%; padding:5px;")
+                    tags$img(src = row$file, style = "width:100%; padding:5px;", alt = row$title)
              ),
              tags$p(strong(row$title)),
              tags$p(em("Citation:"), row$citation)
@@ -63,7 +63,7 @@ gallery_module_server <- function(input, output, session) {
                                           tags$h4(row$title)
                                  ),
                                  tags$div(class = "modal-body",
-                                          tags$img(src = row$file, style = "width:100%")
+                                          tags$img(src = row$file, style = "width:100%", alt = row$title)
                                  ),
                                  tags$div(class = "modal-footer",
                                           tags$p(em("Citation:"), row$citation)
