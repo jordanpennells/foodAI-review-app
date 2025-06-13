@@ -1,5 +1,7 @@
 methodology_module_ui <- function() {
-  fluidPage(
+  tabPanel(
+    "Methodology",
+    fluidPage(
     div(style = "max-width:1000px; margin:auto; line-height:1.6; font-size:16px;",
         h2("Methodology"),
         h3("Background"),
@@ -34,8 +36,9 @@ methodology_module_ui <- function() {
         ),
         br(),
         p(em("For further details, please refer to the associated review article [Insert DOI here]."))
-    )
-  )
+      )
+    )          # close fluidPage
+  )            # close tabPanel
 }
 
 methodology_module_server <- function(input, output, session) {

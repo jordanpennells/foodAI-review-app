@@ -335,7 +335,8 @@ visualizations_module_ui <- function() {
                             type  = 6,
                             color = "#2C3E50"
                           )
-                          )
+
+                          )            # close inner fluidPage
                         )            # close inner tabPanel
               )          # close tabsetPanel
             )            # close fluidPage

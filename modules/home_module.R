@@ -1,5 +1,7 @@
 home_module_ui <- function() {
-  fluidPage(
+  tabPanel(
+    "Home",
+    fluidPage(
     div(style = "max-width:1000px; margin:auto; line-height:1.6; font-size:16px;",
         h2("Introduction"),
         h3("Overview"),
@@ -14,8 +16,9 @@ home_module_ui <- function() {
         h3("Scope of the Review"),
         p("This review provides a systematic bibliometric analysis of AI-related review articles in the food science and engineering literature, examining how key research themes, technological trends, and knowledge gaps have evolved over time. By leveraging bibliometric techniques, this study offers data-driven insights into the trajectory of AI research in food science, identifying which topics have gained prominence and how these trends align with industry adoption. To enhance accessibility and engagement, this review directs readers to an online dashboard app that curates interactive visualisations and a searchable database of food AI review articles, allowing for a more dynamic exploration of the bibliometric data. Beyond mapping the research landscape, this review also presents a comprehensive set of industry case studies, highlighting companies that have delivered practical implementation of AI in the food industry."),
         p("A central theme of this review is the relationship between academic research and industry adoption. By analysing which AI topics have received the most research attention versus those driving commercial innovation, we aim to uncover potential disconnects between research priorities and industry development. This includes an examination of the technical, economic, and regulatory barriers that may be limiting the translation of AI research into large-scale applications.")
-    )
-  )
+      )
+    )          # close fluidPage
+  )            # close tabPanel
 }
 
 home_module_server <- function(input, output, session) {

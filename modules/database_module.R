@@ -1,7 +1,9 @@
 library(DT)
 
 database_module_ui <- function() {
-  fluidPage(
+  tabPanel(
+    "Food AI Review Database",
+    fluidPage(
     titlePanel("Food AI Review Database"),
     p("Browse our curated collection of Food AI review articles below."),
     downloadButton("downloadTable", "Download CSV"),
@@ -13,9 +15,10 @@ database_module_ui <- function() {
           type = 6,
           color = "#2C3E50"
         )
+        )
       )
-    )
-  )
+    )        # close fluidPage
+  )          # close tabPanel
 }
 
 database_module_server <- function(input, output, session) {
