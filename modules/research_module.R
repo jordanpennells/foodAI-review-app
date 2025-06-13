@@ -54,7 +54,7 @@ research_module_ui <- function() {
                         )
               )
             )      # close tabsetPanel
-          )        # close fluidPage
+
 }
 
 research_module_server <- function(input, output, session) {

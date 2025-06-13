@@ -339,6 +339,7 @@ visualizations_module_ui <- function() {
             )
             )          # close tabsetPanel
           )            # close fluidPage
+  )
 }
 
 visualizations_module_server <- function(input, output, session) {

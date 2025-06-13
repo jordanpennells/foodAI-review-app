@@ -78,12 +78,11 @@ In summary, AI offers a versatile toolkit for enhancing various aspects of chees
                )
              )
            )
-  ),
-  
-  
-  
-  
   )
+  
+  
+  
+  
 }
 
 custom_tools_module_server <- function(input, output, session) {
