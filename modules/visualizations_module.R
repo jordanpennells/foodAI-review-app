@@ -33,7 +33,8 @@ visualizations_module_ui <- function() {
                                         step = 1, sep = ""),
                             wellPanel(
                               p("This bar chart shows the number of Food AI review articles published per year in the selected range.")
-                            )
+                            ),
+                            actionButton("resetYearFilters", "Reset Filters")
                           ),
                           mainPanel(
                             withSpinner(
@@ -221,6 +222,9 @@ visualizations_module_ui <- function() {
                                    helpText("Label Size: Adjust the size of the labels on nodes.")
                             )
                           ),
+                          fluidRow(
+                            column(12, actionButton("resetKeywordFilters", "Reset Filters"))
+                          ),
                           plotOutput("keywordCooccurPlot", height = "1000px")
                         )
                ),
@@ -392,6 +396,11 @@ visualizations_module_server <- function(input, output, session) {
         ggsave(file, plot = yearDistPlotObj(), width = 8, height = 6)
       }
     )
+
+    observeEvent(input$resetYearFilters, {
+      updateSliderInput(session, "yearRange",
+                        value = c(2004, max(as.numeric(data_main$PY), na.rm = TRUE)))
+    })
     
     #### (D) Keywords (interactive) ####
     clickedKeyword <- reactiveVal(NULL)
@@ -529,6 +538,14 @@ visualizations_module_server <- function(input, output, session) {
                   type = layout_type,
                   size = input$node_size,
                   labelsize = input$label_size)
+    })
+
+    observeEvent(input$resetKeywordFilters, {
+      updateSliderInput(session, "n_keywords", value = 50)
+      updateCheckboxInput(session, "normalize", value = FALSE)
+      updateSelectInput(session, "layout_type", selected = "fruchterman")
+      updateSliderInput(session, "node_size", value = 5)
+      updateSliderInput(session, "label_size", value = 0.7)
     })
     
     
