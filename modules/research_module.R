@@ -51,10 +51,12 @@ research_module_ui <- function() {
                                       choices = c("<1950", "1951-1980", "1981-1990", "1991-2000", "2001-2010", "2011-2020", ">2020"),
                                       selected = "2011-2020"),
                           wordcloud2Output("keywordWordCloud")
-                        )
-              )
-            )      # close tabsetPanel
 
+                        )
+              )          # close tabPanel
+            )            # close tabsetPanel
+          )              # close fluidPage
+  )                     # close tabPanel
 }
 
 research_module_server <- function(input, output, session) {
