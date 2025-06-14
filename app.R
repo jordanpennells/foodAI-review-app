@@ -316,7 +316,7 @@ k <- 6  # for LDA topics
 ui <- navbarPage(
   title = "Food AI Review App",
   theme = light_theme,
-  header = div(class = "ms-auto me-3", input_dark_mode("theme_toggle")),
+  header = div(class = "ms-auto me-3", input_dark_mode(id = "theme_toggle")),
   home_module_ui(),
   methodology_module_ui(),
   tabPanel("Food AI Review Database", database_module_ui()),
