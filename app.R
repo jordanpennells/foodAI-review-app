@@ -333,9 +333,13 @@ ui <- page_navbar(
 ###########################################
 server <- function(input, output, session) {
   observeEvent(input$theme_toggle, {
-    session$setCurrentTheme(
-      if (identical(input$theme_toggle, "dark")) dark_theme else light_theme
-    )
+    req(!is.null(bslib::bs_current_theme()))
+    new_theme <- if (identical(input$theme_toggle, "dark")) {
+      bslib::bs_theme_update(bslib::bs_current_theme(), bootswatch = "darkly")
+    } else {
+      bslib::bs_theme_update(bslib::bs_current_theme(), bootswatch = "flatly")
+    }
+    session$setCurrentTheme(new_theme)
   })
   home_module_server(input, output, session)
   methodology_module_server(input, output, session)
