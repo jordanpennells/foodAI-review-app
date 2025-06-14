@@ -2,6 +2,14 @@ visualizations_module_ui <- function() {
   # Safely compute year range values in case `data_main` is not yet available
   min_year <- if (exists("data_main")) min(as.numeric(data_main$PY), na.rm = TRUE) else NA
   max_year <- if (exists("data_main")) max(as.numeric(data_main$PY), na.rm = TRUE) else NA
+  if (!is.finite(min_year)) min_year <- 0
+  if (!is.finite(max_year)) max_year <- 1
+  max_edge <- if (exists("adj_df")) max(adj_df$count, na.rm = TRUE) else NA
+  if (!is.finite(max_edge)) max_edge <- 1
+  ai_choices <- names(get0("ai_dictionary", ifnotfound = list()))
+  if (is.null(ai_choices)) ai_choices <- character(0)
+  food_choices <- names(get0("food_dictionary", ifnotfound = list()))
+  if (is.null(food_choices)) food_choices <- character(0)
   tabPanel("Review Article Visualisations",
            fluidPage(
              titlePanel("Review Article Visualisations"),
@@ -32,7 +40,7 @@ visualizations_module_ui <- function() {
                             sliderInput("yearRange", "Select Year Range:",
                                         min   = min_year,
                                         max   = max_year,
-                                        value = c(2004, max_year),
+                                        value = c(min_year, max_year),
                                         step  = 1, sep = ""),
                             wellPanel(
                               p("This bar chart shows the number of Food AI review articles published per year in the selected range.")
@@ -266,7 +274,7 @@ visualizations_module_ui <- function() {
                         fluidPage(
                           sliderInput("edgeFilter", "Minimum Edge Count:",
                                       min = 1,
-                                      max = max(adj_df$count),
+                                      max = max_edge,
                                       value = 1, step = 1),
                           helpText("Edges with count < this value will be filtered out."),
                           plotlyOutput("bipartitePlot", height = "1000px"),
@@ -274,8 +282,8 @@ visualizations_module_ui <- function() {
                           fluidRow(
                             column(6,
                                    checkboxGroupInput("aiSelection", "AI Methods (Red):",
-                                                      choices = names(ai_dictionary),
-                                                      selected = names(ai_dictionary)),
+                                                      choices = ai_choices,
+                                                      selected = ai_choices),
                                    fluidRow(
                                      column(6, actionButton("aiSelectAll", "Select All")),
                                      column(6, actionButton("aiDeselectAll", "Deselect All"))
@@ -283,8 +291,8 @@ visualizations_module_ui <- function() {
                             ),
                             column(6,
                                    checkboxGroupInput("foodSelection", "Food Subdomains (Blue):",
-                                                      choices = names(food_dictionary),
-                                                      selected = names(food_dictionary)),
+                                                      choices = food_choices,
+                                                      selected = food_choices),
                                    fluidRow(
                                      column(6, actionButton("foodSelectAll", "Select All")),
                                      column(6, actionButton("foodDeselectAll", "Deselect All"))
@@ -748,13 +756,15 @@ visualizations_module_server <- function(input, output, session) {
   clickedNode <- reactiveVal(NULL)
   
   observeEvent(input$aiSelectAll, {
-    updateCheckboxGroupInput(session, "aiSelection", selected = names(ai_dictionary))
+    updateCheckboxGroupInput(session, "aiSelection",
+                             selected = names(get0("ai_dictionary", ifnotfound = list())))
   })
   observeEvent(input$aiDeselectAll, {
     updateCheckboxGroupInput(session, "aiSelection", selected = character(0))
   })
   observeEvent(input$foodSelectAll, {
-    updateCheckboxGroupInput(session, "foodSelection", selected = names(food_dictionary))
+    updateCheckboxGroupInput(session, "foodSelection",
+                             selected = names(get0("food_dictionary", ifnotfound = list())))
   })
   observeEvent(input$foodDeselectAll, {
     updateCheckboxGroupInput(session, "foodSelection", selected = character(0))
