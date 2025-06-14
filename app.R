@@ -2,7 +2,7 @@
 ## app.R
 ###########################################
 library(shiny)
-library(shinythemes)
+library(bslib)
 library(memoise)
 library(dplyr)
 library(DT)
@@ -309,10 +309,14 @@ tidy_dtm <- tidy(dtm) # yields columns: document, term, count
 ###########################################
 ## 2) UI
 ###########################################
+light_theme <- bs_theme(version = 5, bootswatch = "flatly")
+dark_theme  <- bs_theme(version = 5, bootswatch = "darkly")
+
 k <- 6  # for LDA topics
 ui <- navbarPage(
   title = "Food AI Review App",
-  theme = shinytheme("flatly"),
+  theme = light_theme,
+  header = div(class = "ms-auto me-3", input_dark_mode(id = "theme_toggle")),
   home_module_ui(),
   methodology_module_ui(),
   tabPanel("Food AI Review Database", database_module_ui()),
@@ -328,6 +332,11 @@ ui <- navbarPage(
 ## 3) SERVER
 ###########################################
 server <- function(input, output, session) {
+  observeEvent(input$theme_toggle, {
+    session$setCurrentTheme(
+      if (identical(input$theme_toggle, "dark")) dark_theme else light_theme
+    )
+  })
   home_module_server(input, output, session)
   methodology_module_server(input, output, session)
   database_module_server(input, output, session)
