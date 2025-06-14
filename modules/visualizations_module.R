@@ -1,4 +1,7 @@
 visualizations_module_ui <- function() {
+  # Safely compute year range values in case `data_main` is not yet available
+  min_year <- if (exists("data_main")) min(as.numeric(data_main$PY), na.rm = TRUE) else NA
+  max_year <- if (exists("data_main")) max(as.numeric(data_main$PY), na.rm = TRUE) else NA
   tabPanel("Review Article Visualisations",
            fluidPage(
              titlePanel("Review Article Visualisations"),
@@ -27,10 +30,10 @@ visualizations_module_ui <- function() {
                         sidebarLayout(
                           sidebarPanel(
                             sliderInput("yearRange", "Select Year Range:",
-                                        min = min(as.numeric(data_main$PY), na.rm = TRUE),
-                                        max = max(as.numeric(data_main$PY), na.rm = TRUE),
-                                        value = c(2004, max(as.numeric(data_main$PY), na.rm = TRUE)),
-                                        step = 1, sep = ""),
+                                        min   = min_year,
+                                        max   = max_year,
+                                        value = c(2004, max_year),
+                                        step  = 1, sep = ""),
                             wellPanel(
                               p("This bar chart shows the number of Food AI review articles published per year in the selected range.")
                             ),
@@ -71,11 +74,10 @@ visualizations_module_ui <- function() {
                             sliderInput("authorTopK", "Top Authors (k):",
                                         min = 1, max = 50, value = 12),
                             sliderInput("authorYearRange", "Select Year Range:",
-                                        min = min(as.numeric(data_main$PY), na.rm = TRUE),
-                                        max = max(as.numeric(data_main$PY), na.rm = TRUE),
-                                        value = c(min(as.numeric(data_main$PY), na.rm = TRUE),
-                                                  max(as.numeric(data_main$PY), na.rm = TRUE)),
-                                        step = 1)
+                                        min   = min_year,
+                                        max   = max_year,
+                                        value = c(min_year, max_year),
+                                        step  = 1)
                           ),
                           mainPanel(
                             withSpinner(
@@ -115,10 +117,9 @@ visualizations_module_ui <- function() {
                             sliderInput("countryTopK", "Top Countries (k):",
                                         min = 1, max = 50, value = 10, step = 1),
                             sliderInput("countryYearRange", "Select Year Range:",
-                                        min   = min(as.numeric(data_main$PY), na.rm = TRUE),
-                                        max   = max(as.numeric(data_main$PY), na.rm = TRUE),
-                                        value = c(min(as.numeric(data_main$PY), na.rm = TRUE),
-                                                  max(as.numeric(data_main$PY), na.rm = TRUE)),
+                                        min   = min_year,
+                                        max   = max_year,
+                                        value = c(min_year, max_year),
                                         step  = 1)
                           ),
                           mainPanel(
