@@ -1,4 +1,8 @@
 research_module_ui <- function() {
+  min_year <- min(research_refs_meta$oa_year, na.rm = TRUE)
+  max_year <- max(research_refs_meta$oa_year, na.rm = TRUE)
+  if (!is.finite(min_year)) min_year <- 0
+  if (!is.finite(max_year)) max_year <- 1
   tabPanel(
     "Research Article Analysis",
     fluidPage(
@@ -9,12 +13,9 @@ research_module_ui <- function() {
           fluidPage(
             sliderInput(
               "yearRangeResearch", "Select Publication Year Range:",
-              min = min(research_refs_meta$oa_year, na.rm = TRUE),
-              max = max(research_refs_meta$oa_year, na.rm = TRUE),
-              value = c(
-                min(research_refs_meta$oa_year, na.rm = TRUE),
-                max(research_refs_meta$oa_year, na.rm = TRUE)
-              ),
+              min = min_year,
+              max = max_year,
+              value = c(min_year, max_year),
               step = 1
             ),
             h3("Research Articles Over Time"),
@@ -33,12 +34,9 @@ research_module_ui <- function() {
           fluidPage(
             sliderInput(
               "yearRangeKeywords", "Select Publication Year Range:",
-              min = min(research_refs_meta$oa_year, na.rm = TRUE),
-              max = max(research_refs_meta$oa_year, na.rm = TRUE),
-              value = c(
-                min(research_refs_meta$oa_year, na.rm = TRUE),
-                max(research_refs_meta$oa_year, na.rm = TRUE)
-              ),
+              min = min_year,
+              max = max_year,
+              value = c(min_year, max_year),
               step = 1
             ),
             sliderInput(
