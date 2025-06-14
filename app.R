@@ -23,16 +23,16 @@ library(shinycssloaders)
 library(widyr)
 library(tidygraph)
 
-# Load modular components
-source("modules/home_module.R")
-source("modules/methodology_module.R")
-source("modules/database_module.R")
-source("modules/visualizations_module.R")
-source("modules/research_module.R")
-source("modules/custom_tools_module.R")
-source("modules/case_studies_module.R")
-source("modules/gallery_module.R")
-source("modules/help_module.R")
+# Load modular components in the same environment as this script
+source("modules/home_module.R", local = TRUE)
+source("modules/methodology_module.R", local = TRUE)
+source("modules/database_module.R", local = TRUE)
+source("modules/visualizations_module.R", local = TRUE)
+source("modules/research_module.R", local = TRUE)
+source("modules/custom_tools_module.R", local = TRUE)
+source("modules/case_studies_module.R", local = TRUE)
+source("modules/gallery_module.R", local = TRUE)
+source("modules/help_module.R", local = TRUE)
 
 
 ###########################################
