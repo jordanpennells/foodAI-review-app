@@ -47,9 +47,9 @@ Obtained from a February 2025 search of the Web of Science Core Collection and c
 - `FoodAI_Feb2025.bib` – bibliographic records for the 128 review articles analysed in the dashboard. `app.R` now reads this file directly instead of relying on an external CSV.
 - `openalex_minimal.csv` – metadata retrieved from the OpenAlex API for research articles cited by the reviews.
 - `titles_and_abstracts.csv` – matching titles and abstracts from the same OpenAlex query.
-- `case_studies.csv` – ten industry case studies referenced in the review article.
+- `case_studies.csv` – ten industry case studies from the Food AI review listing each company's AI method and application area.
 
-The case studies dataset summarises notable companies applying AI across the food sector, complementing the narrative examples discussed in the paper.
+Each row summarises the approach described for that company in the article, pairing the AI technique with its main application.
 
 These files were collected as part of the systematic review described in the accompanying paper and should be kept in the repository root so that `app.R` can load them correctly.
 
