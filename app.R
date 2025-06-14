@@ -313,7 +313,7 @@ light_theme <- bs_theme(version = 5, bootswatch = "flatly")
 dark_theme  <- bs_theme(version = 5, bootswatch = "darkly")
 
 k <- 6  # for LDA topics
-ui <- navbarPage(
+ui <- page_navbar(
   title = "Food AI Review App",
   theme = light_theme,
   header = div(class = "ms-auto me-3", input_dark_mode(id = "theme_toggle")),
